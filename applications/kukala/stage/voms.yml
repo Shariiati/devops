@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-voms-api
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-voms-api
+  template:
+    metadata:
+      labels:
+        app: kukala-voms-api
+    spec:
+      containers:
+      - name: kukala-voms-api
+        image: docker.sohato.com/kukala/voms/stage:latest
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-voms-api
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-voms-api
+  ports:
+  - port: 80
+    targetPort: 80
