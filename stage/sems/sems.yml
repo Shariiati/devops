@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-sems-api
-        image: docker.sohato.com/kukala/sems/stage:v148
+        image: docker.sohato.com/kukala/sems/stage:v149
         resources:
           limits:
             memory: "512Mi"
