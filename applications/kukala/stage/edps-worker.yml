@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-edps-worker
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-edps-worker
+  template:
+    metadata:
+      labels:
+        app: kukala-edps-worker
+    spec:
+      containers:
+      - name: kukala-edps-worker
+        image: docker.sohato.com/kukala/edps/stage-worker:v4
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: stage
+          - name: elasticsearch__url
+            value: http://elastic-elasticsearch:9200/
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-edps-worker
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-edps-worker
+  ports:
+  - port: 80
+    targetPort: 80
