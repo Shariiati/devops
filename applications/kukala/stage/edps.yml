@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-edps-api
-        image: docker.sohato.com/kukala/edps/stage:v20
+        image: docker.sohato.com/kukala/edps/stage:v21
         resources:
           limits:
             memory: "512Mi"
