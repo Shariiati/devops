@@ -21,9 +21,11 @@ spec:
             cpu: "500m"
         env:
           - name: ASPNETCORE_ENVIRONMENT
-            value: stage
+            value: Stage
           - name: elasticsearch__url
             value: http://elastic-elasticsearch:9200/
+          - name: DOTNET_ENVIRONMENT
+            value: staging
         ports:
         - containerPort: 80
 ---

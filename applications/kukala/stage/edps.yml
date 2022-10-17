@@ -21,7 +21,7 @@ spec:
             cpu: "500m"
         env:
           - name: ASPNETCORE_ENVIRONMENT
-            value: stage
+            value: Staging
           - name: elasticsearch__url
             value: http://elastic-elasticsearch:9200/
         ports:
