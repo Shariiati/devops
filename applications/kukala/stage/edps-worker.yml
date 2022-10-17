@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-edps-worker
-        image: docker.sohato.com/kukala/edps/stage-worker:v20
+        image: docker.sohato.com/kukala/edps/stage-worker:koosha
         resources:
           limits:
             memory: "512Mi"
