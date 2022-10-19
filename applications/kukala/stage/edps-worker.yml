@@ -4,7 +4,7 @@ metadata:
   name: kukala-edps-worker
   namespace: stage-kukala
 spec:
-  replicas: 1
+  replicas: 
   selector:
     matchLabels:
       app: kukala-edps-worker
