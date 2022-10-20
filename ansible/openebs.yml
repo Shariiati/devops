@@ -1,0 +1,12 @@
+- hosts: all
+  become: true
+  tasks:
+
+    - name: instal openisci
+      apt:
+        name: [open-iscsi,zfsutils-linux]
+        state: present
+    - name: enable service
+      shell: |
+        systemctl enable --now iscsid  
+

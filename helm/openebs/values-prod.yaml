@@ -28,7 +28,7 @@ legacy:
 
 image:
   pullPolicy: IfNotPresent
-  repository: "docker.sohato.com"
+  repository: "docker.sohato.com/"
 
 apiserver:
   enabled: true
