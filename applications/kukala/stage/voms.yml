@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-voms-api
-        image: docker.sohato.com/kukala/voms/stage:v888
+        image: docker.sohato.com/kukala/voms/stage:v17
         resources:
           limits:
             memory: "512Mi"
