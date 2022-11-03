@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-bicm-api
-        image: docker.sohato.com/kukala/bicm/stage:v15
+        image: docker.sohato.com/kukala/bicm/stage:v
         resources:
           limits:
             memory: "512Mi"
