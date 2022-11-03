@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-idp-api
-        image: docker.sohato.com/kukala/idp/stage:v165
+        image: docker.sohato.com/kukala/idp/stage:v
         resources:
           limits:
             memory: "512Mi"
