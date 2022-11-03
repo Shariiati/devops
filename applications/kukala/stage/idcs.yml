@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-idcs-api
-        image: docker.sohato.com/kukala/idcs/stage:v165
+        image: docker.sohato.com/kukala/idcs/stage:v
         resources:
           limits:
             memory: "512Mi"
