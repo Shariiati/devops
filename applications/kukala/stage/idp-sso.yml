@@ -1,1 +1,35 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-idp-sso
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-idp-sso
+  template:
+    metadata:
+      labels:
+        app: kukala-idp-sso
+    spec:
+      containers:
+      - name: kukala-idp-sso
+        image: docker.sohato.com/kukala/idp/stage:v
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-idp-sso
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-idp-sso
+  ports:
+  - port: 80
+    targetPort: 80
