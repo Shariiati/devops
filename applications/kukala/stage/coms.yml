@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-coms-api
-        image: docker.sohato.com/kukala/coms/stage:v22
+        image: docker.sohato.com/kukala/coms/stage:v23
         resources:
           limits:
             memory: "512Mi"
