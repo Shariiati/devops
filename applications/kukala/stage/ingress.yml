@@ -5,6 +5,9 @@ metadata:
   namespace: stage-kukala
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts: stage-api.kukala.ir
+      secretName: star-kukala-ir
   rules:
   - host: stage-api.kukala.ir
     http:
