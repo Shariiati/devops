@@ -16,8 +16,6 @@ spec:
       - name: kukala-voms-api
         image: docker.sohato.com/kukala/voms/stage:v17
         env:
-          - name: DOTNET_ENVIRONMENT
-            value: staging
           - name: ASPNETCORE_ENVIRONMENT
             value: Stage
           - name: ApplicationSettings__ExternalService__IDPService__AddRoleUrl
