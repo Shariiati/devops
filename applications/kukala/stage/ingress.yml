@@ -1,0 +1,29 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: stage-kukala
+  namespace: stage-kukala
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: stage-api.kukala.ir
+    http:
+      paths:
+      - backend:
+          service:
+            name: kukala-sems-api
+            port:
+              number: 80
+        path: /sems
+        pathType: Prefix
+  - host: stage-api.kukala.ir
+    http:
+      paths:
+      - backend:
+          service:
+            name: kukala-voms-api
+            port:
+              number: 80
+        path: /voms
+        pathType: Prefix
+
