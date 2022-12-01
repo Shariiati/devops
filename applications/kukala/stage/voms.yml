@@ -18,6 +18,8 @@ spec:
         env:
           - name: DOTNET_ENVIRONMENT
             value: staging
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
           - name: ApplicationSettings__ExternalService__IDPService__AddRoleUrl
             value: http://kukala-idp-api/api/user/AddRole
           - name: ApplicationSettings__ExternalService__SEMSService__PostGetbyListIdUrl
