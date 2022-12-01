@@ -16,6 +16,8 @@ spec:
       - name: kukala-voms-api
         image: docker.sohato.com/kukala/voms/stage:v17
         env:
+          - name: DOTNET_ENVIRONMENT
+            value: staging
           - name: ApplicationSettings__ExternalService__IDPService__AddRoleUrl
             value: http://kukala-idp-api/api/user/AddRole
           - name: ApplicationSettings__ExternalService__SEMSService__PostGetbyListIdUrl
