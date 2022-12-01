@@ -15,6 +15,26 @@ spec:
       containers:
       - name: kukala-voms-api
         image: docker.sohato.com/kukala/voms/stage:v17
+        env:
+          - name: ApplicationSettings__ExternalService__IDPService__AddRoleUrl
+            value: http://kukala-idp-api/api/user/AddRole
+          - name: ApplicationSettings__ExternalService__SEMSService__PostGetbyListIdUrl
+            value: http://kukala-sems-api/api/Post/GetByListId?
+          - name: ApplicationSettings__ExternalService__SEMSService__GetPostInfoByUserNameUrl
+            value: http://kukala-sems-api/api/Post/GetPostInfoByUserName?userName=
+          - name: ApplicationSettings__ExternalService__SEMSService__SearchUrl
+            value: http://kukala-sems-api/api/Post/Search
+          - name: ApplicationSettings__ExternalService__SEMSService__UpdatePostInfoUrl
+            value: "http://kukala-sems-api/api/Post/UpdatePostInfo"
+          - name: ApplicationSettings__ExternalService__SEMSService__GetDetailUrl            
+            value: "http://kukala-sems-api/api/Post/GetDetail?postId="
+          - name: ApplicationSettings__ExternalService__SEMSService__UpdateStockUrl
+            value: "http://kukala-sems-api/api/Post/UpdateStock"
+          - name: ApplicationSettings__ExternalService__SEMSService__GetDashboardUrl
+            value: "http://kukala-sems-api/api/Post/GetDashboard"
+          - name: ApplicationSettings__ExternalService__IDCSService__AddOrUpdateAccountUrl
+            value: http://kukala-idcs-api/api/Account/AddOrUpdate
+
         resources:
           limits:
             memory: "512Mi"
