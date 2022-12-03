@@ -19,6 +19,14 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
+          - name: ExternalService__CaptionAnalyseUrl
+            value: http://kukala-sems-api/analyse?input=
+          - name: ExternalService__SEMSUrl
+            value: http://kukala-sems-api/api/BasicInfo/GetParetCategory?parentCategoryId=
+
         ports:
         - containerPort: 80
 ---
