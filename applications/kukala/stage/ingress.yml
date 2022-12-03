@@ -65,3 +65,14 @@ spec:
           path: /edps
           pathType: Prefix
 
+  - host: stage-api.kukala.ir
+    http:
+        paths:
+        - backend:
+            service:
+              name: kukala-edps-worker
+              port:
+                number: 80
+          path: /edps-worker
+          pathType: Prefix
+
