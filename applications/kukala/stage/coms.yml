@@ -20,6 +20,8 @@ spec:
             memory: "512Mi"
             cpu: "500m"
         env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
           - name: ApplicationSettings__SEMSService__PostGetbyListIdUrl
             value: http://kukala-sems-api/api/Post/GetByListId?
           - name: ApplicationSettings__SEMSService__GetPostInfoByUserNameUrl
