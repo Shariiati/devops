@@ -98,3 +98,37 @@ spec:
           path: /idp
           pathType: Prefix
 
+  - host: stage-api.kukala.ir
+    http:
+        paths:
+        - backend:
+            service:
+              name: kukala-idp-sso
+              port:
+                number: 80
+          path: /idp-sso
+          pathType: Prefix
+
+  - host: stage-api.kukala.ir
+    http:
+        paths:
+        - backend:
+            service:
+              name: kukala-idcs-api
+              port:
+                number: 80
+          path: /idcs
+          pathType: Prefix
+
+  - host: stage-api.kukala.ir
+    http:
+        paths:
+        - backend:
+            service:
+              name: kukala-smms-api
+              port:
+                number: 80
+          path: /smms
+          pathType: Prefix
+
+
