@@ -19,6 +19,16 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        env:
+          - name: ApplicationSettings__SEMSService__PostGetbyListIdUrl
+            value: http://kukala-sems-api/api/Post/GetByListId?
+          - name: ApplicationSettings__SEMSService__GetPostInfoByUserNameUrl
+            value: http://kukala-sems-api/api/Post/GetPostInfoByUserName?userName=
+          - name: ApplicationSettings__SEMSService__GetPostsInfoByIds
+            value: http://kukala-sems-api/api/Post/Search?
+          - name: ApplicationSettings__SEMSService__SearchUrl
+            value: http://kukala-sems-api/api/Post/Search
+
         ports:
         - containerPort: 80
 ---
