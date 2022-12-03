@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-smms-api
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-smms-api
+  template:
+    metadata:
+      labels:
+        app: kukala-smms-api
+    spec:
+      containers:
+      - name: kukala-smms-api
+        image: docker.sohato.com/kukala/smms/stage:v3
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        env:
+         - name: ASPNETCORE_ENVIRONMENT
+           value: Stage
+      ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-smms-api
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-smms-api
+  ports:
+  - port: 80
+    targetPort: 80
