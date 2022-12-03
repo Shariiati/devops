@@ -19,6 +19,11 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        env:
+          - name: ApplicationSettings__IDP__Url
+            value: http://kukala-idp-api/
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
         ports:
         - containerPort: 80
 ---
