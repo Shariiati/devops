@@ -3,6 +3,8 @@ kind: Ingress
 metadata:
   name: stage-kukala
   namespace: stage-kukala
+  annotations:
+    nginx.ingress.kubernetes.io/rewrite-target: /$2
 spec:
   ingressClassName: nginx
   tls:
