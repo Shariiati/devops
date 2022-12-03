@@ -19,6 +19,9 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        env:
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
         ports:
         - containerPort: 80
 ---
