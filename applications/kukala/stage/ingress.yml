@@ -20,7 +20,7 @@ spec:
             name: kukala-sems-api
             port:
               number: 80
-        path: /sems
+        path: /sems(/|$)(.*)
         pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -42,7 +42,7 @@ spec:
             name: kukala-cmas-api
             port:
               number: 80
-        path: /cmas
+        path: /cmas(/|$)(.*)
         pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -53,7 +53,7 @@ spec:
               name: kukala-coms-api
               port:
                 number: 80
-          path: /coms
+          path: /coms(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -64,7 +64,7 @@ spec:
               name: kukala-edps-api
               port:
                 number: 80
-          path: /edps
+          path: /edps(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -75,7 +75,7 @@ spec:
               name: kukala-edps-worker
               port:
                 number: 80
-          path: /edps-worker
+          path: /edps-worker(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -86,7 +86,7 @@ spec:
               name: kukala-gateway-api
               port:
                 number: 80
-          path: /gateway
+          path: /gateway(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -97,7 +97,7 @@ spec:
               name: kukala-idp-api
               port:
                 number: 80
-          path: /idp
+          path: /idp(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -108,7 +108,7 @@ spec:
               name: kukala-idp-sso
               port:
                 number: 80
-          path: /idp-sso
+          path: /idp-sso(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -119,7 +119,7 @@ spec:
               name: kukala-idcs-api
               port:
                 number: 80
-          path: /idcs
+          path: /idcs(/|$)(.*)
           pathType: Prefix
 
   - host: stage-api.kukala.ir
@@ -130,7 +130,7 @@ spec:
               name: kukala-smms-api
               port:
                 number: 80
-          path: /smms
+          path: /smms(/|$)(.*)
           pathType: Prefix
 
 
