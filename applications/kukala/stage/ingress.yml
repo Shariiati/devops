@@ -43,4 +43,15 @@ spec:
         path: /cmas
         pathType: Prefix
 
+  - host: stage-api.kukala.ir
+    http:
+        paths:
+        - backend:
+            service:
+              name: kukala-coms-api
+              port:
+                number: 80
+          path: /coms
+          pathType: Prefix
+
 
