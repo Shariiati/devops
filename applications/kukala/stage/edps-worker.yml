@@ -24,9 +24,7 @@ spec:
           - name: ASPNETCORE_ENVIRONMENT
             value: Stage
           - name: elasticsearch__url
-            value: http://elastic-elasticsearch:9200/
-          - name: DOTNET_ENVIRONMENT
-            value: staging
+            value: http://elastic-elasticsearch/
         ports:
         - containerPort: 80
 ---
