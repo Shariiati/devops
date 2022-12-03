@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-cmas-api
-        image: docker.sohato.com/kukala/cmas/stage:v5
+        image: docker.sohato.com/kukala/cmas/stage:v6
         resources:
           limits:
             memory: "512Mi"
