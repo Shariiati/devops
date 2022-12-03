@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-smms-api
-        image: docker.sohato.com/kukala/smms/stage:v2
+        image: docker.sohato.com/kukala/smms/stage:v3
         resources:
           limits:
             memory: "512Mi"
