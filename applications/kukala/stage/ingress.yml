@@ -20,6 +20,7 @@ spec:
               number: 80
         path: /sems
         pathType: Prefix
+
   - host: stage-api.kukala.ir
     http:
       paths:
@@ -30,4 +31,16 @@ spec:
               number: 80
         path: /voms
         pathType: Prefix
+  
+  - host: stage-api.kukala.ir
+    http:
+      paths:
+      - backend:
+          service:
+            name: kukala-cmas-api
+            port:
+              number: 80
+        path: /cmas
+        pathType: Prefix
+
 
