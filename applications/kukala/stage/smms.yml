@@ -22,8 +22,8 @@ spec:
         env:
          - name: ASPNETCORE_ENVIRONMENT
            value: Stage
-      ports:
-        - containerPort: 80
+        ports:
+         - containerPort: 80
 ---
 apiVersion: v1
 kind: Service
