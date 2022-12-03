@@ -19,6 +19,14 @@ spec:
           limits:
             memory: "512Mi"
             cpu: "500m"
+        env:
+          - name: ExternalService__ComsService__GetCommentByPostIdUrl
+            value: http://kukala-coms-api/api/Comment/GetByPagination?Page=1&Count=10&postId=
+          - name: ExternalService__VomsService__GetDetailStoreUrl
+            value: http://kukala-voms-api/api/Vendor/StoreDetail?instaUserName=
+          - name: ASPNETCORE_ENVIRONMENT
+            value: Stage
+
         ports:
         - containerPort: 80
 ---
