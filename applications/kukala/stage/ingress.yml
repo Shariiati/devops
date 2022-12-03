@@ -31,7 +31,7 @@ spec:
             name: kukala-voms-api
             port:
               number: 80
-        path: /voms
+        path: /voms(/|$)(.*)
         pathType: Prefix
   
   - host: stage-api.kukala.ir
