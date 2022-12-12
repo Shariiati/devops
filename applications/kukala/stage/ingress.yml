@@ -22,10 +22,6 @@ spec:
               number: 80
         path: /sems(/|$)(.*)
         pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-      paths:
       - backend:
           service:
             name: kukala-voms-api
@@ -33,104 +29,66 @@ spec:
               number: 80
         path: /voms(/|$)(.*)
         pathType: Prefix
-  
-  - host: stage-api.kukala.ir
-    http:
-      paths:
       - backend:
           service:
             name: kukala-cmas-api
             port:
               number: 80
         path: /cmas(/|$)(.*)
+        pathType: Prefix  
+      - backend:
+          service:
+            name: kukala-coms-api
+            port:
+              number: 80
+        path: /coms(/|$)(.*)
         pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-coms-api
-              port:
-                number: 80
-          path: /coms(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-edps-api
-              port:
-                number: 80
-          path: /edps(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-edps-worker
-              port:
-                number: 80
-          path: /edps-worker(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-gateway-api
-              port:
-                number: 80
-          path: /gateway(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-idp-api
-              port:
-                number: 80
-          path: /idp(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-idp-sso
-              port:
-                number: 80
-          path: /idp-sso(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-idcs-api
-              port:
-                number: 80
-          path: /idcs(/|$)(.*)
-          pathType: Prefix
-
-  - host: stage-api.kukala.ir
-    http:
-        paths:
-        - backend:
-            service:
-              name: kukala-smms-api
-              port:
-                number: 80
-          path: /smms(/|$)(.*)
-          pathType: Prefix
-
-
+      - backend:
+          service:
+            name: kukala-edps-api
+            port:
+              number: 80
+        path: /edps(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-edps-worker
+            port:
+              number: 80
+        path: /edps-worker(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-gateway-api
+            port:
+              number: 80
+        path: /gateway(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-smms-api
+            port:
+              number: 80
+        path: /smms(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-idp-api
+            port:
+              number: 80
+        path: /idp(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-idp-sso
+            port:
+              number: 80
+        path: /idp-sso(/|$)(.*)
+        pathType: Prefix
+      - backend:
+          service:
+            name: kukala-idcs-api
+            port:
+              number: 80
+        path: /idcs(/|$)(.*)
+        pathType: Prefix
