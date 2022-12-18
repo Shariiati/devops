@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-gateway-api
-        image: docker.sohato.com/kukala/gateway/stage:v12
+        image: docker.sohato.com/kukala/gateway/stage:v13
         resources:
           limits:
             memory: "512Mi"
