@@ -6,6 +6,10 @@ metadata:
     name: front-kukala
     namespace: stage-kukala
 spec:
+  tls:
+    - hosts: 
+      - stage-api.kukala.ir
+      secretName: star-kukala-ir
   rules:
   - host: stage-mobile.kukala.ir
     http:
