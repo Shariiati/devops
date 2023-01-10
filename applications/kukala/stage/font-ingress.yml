@@ -8,7 +8,9 @@ metadata:
 spec:
   tls:
     - hosts: 
-      - stage-api.kukala.ir
+      - stage-mobile.kukala.ir
+      - stage-admin.kukala.ir
+      - stage-desktop.kukala.ir
       secretName: star-kukala-ir
   rules:
   - host: stage-mobile.kukala.ir
@@ -19,5 +21,15 @@ spec:
         backend:
           service:
             name: msps
+            port: 
+              number: 80
+  - host: stage-admin.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: wpms
             port: 
               number: 80
