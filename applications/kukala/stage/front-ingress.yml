@@ -8,6 +8,7 @@ metadata:
 spec:
   tls:
     - hosts: 
+      - stage.kukala.ir
       - stage-mobile.kukala.ir
       - stage-admin.kukala.ir
       - stage-desktop.kukala.ir
@@ -23,6 +24,16 @@ spec:
             name: msps
             port: 
               number: 80
+  - host: stage.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/admin"
+        backend:
+          service:
+            name: wpms
+            port: 
+              number: 80      
   - host: stage-admin.kukala.ir
     http:
       paths:
