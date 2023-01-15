@@ -28,7 +28,7 @@ spec:
     http:
       paths:
       - pathType: Prefix
-        path: "/admin"
+        path: "/panel"
         backend:
           service:
             name: wpms
