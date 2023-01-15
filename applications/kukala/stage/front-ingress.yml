@@ -44,7 +44,7 @@ spec:
             name: wpms
             port: 
               number: 80
-  - host: stage-desktop.kukala.ir
+  - host: stage.kukala.ir
     http:
       paths:
       - pathType: Prefix
