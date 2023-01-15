@@ -44,3 +44,13 @@ spec:
             name: wpms
             port: 
               number: 80
+  - host: stage-desktop.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: wsps
+            port: 
+              number: 80
