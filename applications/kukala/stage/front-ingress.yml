@@ -24,16 +24,7 @@ spec:
             name: msps
             port: 
               number: 80
-  - host: stage.kukala.ir
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/panel"
-        backend:
-          service:
-            name: wpms
-            port: 
-              number: 80      
+    
   - host: stage-admin.kukala.ir
     http:
       paths:
@@ -51,6 +42,6 @@ spec:
         path: "/"
         backend:
           service:
-            name: wsps
+            name: kukala-envoy-ingress
             port: 
               number: 80
