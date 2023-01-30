@@ -172,7 +172,7 @@ data:
             - lb_endpoints:
               - endpoint:
                   address:
-                    socket_address: { address: wpms, port_value: 80 }      
+                    socket_address: { address: wsps, port_value: 80 }      
         - name: kukala_mobile_cl
           connect_timeout: 5s
           circuit_breakers:
@@ -225,7 +225,7 @@ spec:
     metadata:
       labels:
         app: kukala-envoy-ingress
-        chert: n1
+        version: n2
     spec:      
       volumes:
         - name: kukala-envoy-ingress-vol
