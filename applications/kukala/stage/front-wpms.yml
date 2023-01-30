@@ -14,10 +14,10 @@ spec:
     spec:
       containers:
       - name: wpms
-        image: docker.sohato.com/kukala/wpms/stage:v29
+        image: docker.sohato.com/kukala/wpms/stage:v46
         resources:
           limits:
-            memory: "512Mi"
+            memory: "2048Mi"
         ports:
         - containerPort: 80
 ---
