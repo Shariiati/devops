@@ -10,7 +10,7 @@ spec:
   tls:
     - hosts: 
       - stage-api.kukala.ir
-      secretName: star-kukala-ir
+      secretName: kukala-cert
   rules:
   - host: stage-api.kukala.ir
     http:
