@@ -12,7 +12,7 @@ spec:
       - stage-mobile.kukala.ir
       - stage-admin.kukala.ir
       - stage-desktop.kukala.ir
-      secretName: star-kukala-ir
+      secretName: kukala-cert
   rules:
   - host: stage-mobile.kukala.ir
     http:
