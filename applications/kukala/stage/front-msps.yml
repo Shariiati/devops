@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: msps
-        image: docker.sohato.com/kukala/msps/stage:v170
+        image: docker.sohato.com/kukala/msps/stage:v171
         resources:
           limits:
             memory: "512Mi"
