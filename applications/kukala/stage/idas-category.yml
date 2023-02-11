@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-idas-category
-        image: docker.sohato.com/kukala/idas-category/stage:v19
+        image: 
         resources:
           limits:
             memory: "512Mi"
