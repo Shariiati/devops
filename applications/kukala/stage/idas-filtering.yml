@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-idas-filtering
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-idas-filtering
+  template:
+    metadata:
+      labels:
+        app: kukala-idas-filtering
+    spec:
+      containers:
+      - name: kukala-idas-filtering
+        image: docker.sohato.com/kukala/idas-filtering/stage:v12
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-idas-filtering
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-idas-filtering
+  ports:
+  - port: 80
+    targetPort: 80
+
+
