@@ -1,1 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-idas-nudity-api
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-idas-nudity-api
+  template:
+    metadata:
+      labels:
+        app: kukala-idas-nudity-api
+    spec:
+      containers:
+      - name: kukala-idas-nudity-api
+        image: docker.sohato.com/kukala/idas-nudity-api/stage:v12
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-idas-nudity-api
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-idas-nudity-api
+  ports:
+  - port: 80
+    targetPort: 80
+
 
