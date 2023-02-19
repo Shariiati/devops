@@ -1,19 +1,19 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: kukala-kukala-python-idas-nudity-api
+  name: kukala-python-idas-nudity-api
   namespace: stage-kukala
 spec:
   selector:
     matchLabels:
-      app: kukala-kukala-python-idas-nudity-api
+      app: kukala-python-idas-nudity-api
   template:
     metadata:
       labels:
-        app: kukala-kukala-python-idas-nudity-api
+        app: kukala-python-idas-nudity-api
     spec:
       containers:
-      - name: kukala-kukala-python-idas-nudity-api
+      - name: kukala-python-idas-nudity-api
         image: docker.sohato.com/kukala/kukala-python-idas-nudity-api/stage:v7
         resources:
           limits:
@@ -25,11 +25,11 @@ spec:
 apiVersion: v1
 kind: Service
 metadata:
-  name: kukala-kukala-python-idas-nudity-api
+  name: kukala-python-idas-nudity-api
   namespace: stage-kukala
 spec:
   selector:
-    app: kukala-kukala-python-idas-nudity-api
+    app: kukala-python-idas-nudity-api
   ports:
   - port: 80
     targetPort: 80
