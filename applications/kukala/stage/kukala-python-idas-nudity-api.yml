@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-kukala-python-idas-nudity-api
-        image: docker.sohato.com/kukala/kukala-python-idas-nudity-api/stage:v12
+        image: docker.sohato.com/kukala/kukala-python-idas-nudity-api/stage:v7
         resources:
           limits:
             memory: "512Mi"
