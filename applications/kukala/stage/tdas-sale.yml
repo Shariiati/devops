@@ -1,0 +1,37 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-tdas-sale
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-tdas-sale
+  template:
+    metadata:
+      labels:
+        app: kukala-tdas-sale
+    spec:
+      containers:
+      - name: kukala-tdas-sale
+        image: docker.sohato.com/kukala/tdas-sale/stage:v12
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-tdas-sale
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-tdas-sale
+  ports:
+  - port: 80
+    targetPort: 80
+
+
