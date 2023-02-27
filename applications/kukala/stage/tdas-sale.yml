@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kukala-tdas-sale
-        image: docker.sohato.com/kukala/tdas-sale/stage:v6
+        image: docker.sohato.com/kukala/tdas-sale/stage:v7
         resources:
           limits:
             memory: "512Mi"
