@@ -12,7 +12,7 @@ spec:
       - prod-mobile.kukala.ir
       - prod-admin.kukala.ir
       - prod-desktop.kukala.ir
-      secretName: kukala-cert
+      secretName: kukala-tls
   rules:
   - host: prod-mobile.kukala.ir
     http:
