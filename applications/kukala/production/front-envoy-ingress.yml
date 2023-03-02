@@ -2,7 +2,7 @@ apiVersion: v1
 kind: Service
 metadata:
   name: kukala-envoy-ingress
-  namespace: stage-kukala
+  namespace: kukala
   labels:
     app: kukala-envoy-ingress
 spec:
@@ -21,7 +21,7 @@ apiVersion: v1
 kind: ConfigMap
 metadata:
   name: kukala-envoy-ingress
-  namespace: stage-kukala
+  namespace: kukala
 data:
   envoy-yaml: |
     admin:
@@ -78,8 +78,8 @@ data:
               route_config:
                 name: local_route
                 virtual_hosts:
-                  - name: stage_kukala_ir
-                    domains: ["stage.kukala.ir" ,"www.stage.kukala.ir"]
+                  - name: prod_kukala_ir
+                    domains: ["prod.kukala.ir" ,"www.prod.kukala.ir"]
                     routes:
                       - match:
                           prefix: /panel
@@ -215,7 +215,7 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   name: kukala-envoy-ingress
-  namespace: stage-kukala
+  namespace: kukala
 spec:
   selector:
     matchLabels:
