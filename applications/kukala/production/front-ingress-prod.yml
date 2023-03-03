@@ -36,7 +36,7 @@ spec:
             name: wpms
             port: 
               number: 80
-  - host: prod.kukala.ir
+  - host: kukala.ir
     http:
       paths:
       - pathType: Prefix
