@@ -78,7 +78,7 @@ data:
               route_config:
                 name: local_route
                 virtual_hosts:
-                  - name: prod_kukala_ir
+                  - name: stage_kukala_ir
                     domains: ["prod.kukala.ir"]
                     routes:
                       - match:
