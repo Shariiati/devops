@@ -78,8 +78,8 @@ data:
               route_config:
                 name: local_route
                 virtual_hosts:
-                  - name: pr_kukala_ir
-                    domains: ["pr.kukala.ir"]
+                  - name: prod_kukala_ir
+                    domains: ["prod.kukala.ir"]
                     routes:
                       - match:
                           prefix: /panel
