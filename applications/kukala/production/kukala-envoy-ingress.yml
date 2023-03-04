@@ -79,7 +79,7 @@ data:
                 name: local_route
                 virtual_hosts:
                   - name: stage_kukala_ir
-                    domains: ["stage.kukala.ir" ,"www.stage.kukala.ir"]
+                    domains: ["pr.kukala.ir"]
                     routes:
                       - match:
                           prefix: /panel
