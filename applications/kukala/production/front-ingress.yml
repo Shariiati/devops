@@ -1,0 +1,47 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: front-kukala
+  namespace: kukala
+  labels:
+    name: front-kukala
+spec:
+  tls:
+    - hosts: 
+      - pr.kukala.ir
+      - pr-mobile.kukala.ir
+      - pr-admin.kukala.ir
+      - pr-desktop.kukala.ir
+      secretName: kukala-cert
+  rules:
+  - host: pr-mobile.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: msps
+            port: 
+              number: 80
+    
+  - host: pr-admin.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: wpms
+            port: 
+              number: 80
+  - host: pr.kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kukala-envoy-ingress
+            port: 
+              number: 80
