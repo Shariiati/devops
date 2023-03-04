@@ -79,7 +79,7 @@ data:
                 name: local_route
                 virtual_hosts:
                   - name: prod_kukala_ir
-                    domains: ["prod.kukala.ir" ,"www.prod.kukala.ir"]
+                    domains: ["prod.kukala.ir"]
                     routes:
                       - match:
                           prefix: /panel
@@ -94,7 +94,7 @@ data:
                               regex: ".*Mobile.*"     
                         route:
                           cluster: kukala_mobile_cl
-                          prefix_rewrite: "/" 
+                          prefix_rewrite: "/"
                       - match:
                           prefix: /
                         route:
