@@ -12,7 +12,7 @@ spec:
       - pr-mobile.kukala.ir
       - pr-admin.kukala.ir
       - pr-desktop.kukala.ir
-      secretName: kukala-cert
+      secretName: kukala-tls
   rules:
   - host: pr-mobile.kukala.ir
     http:
