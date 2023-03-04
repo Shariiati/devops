@@ -9,13 +9,13 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts: 
-      - pr.kukala.ir
-      - pr-mobile.kukala.ir
-      - pr-admin.kukala.ir
-      - pr-desktop.kukala.ir
+      - prod.kukala.ir
+      - prod-mobile.kukala.ir
+      - prod-admin.kukala.ir
+      - prod-desktop.kukala.ir
       secretName: kukala-tls
   rules:
-  - host: pr-mobile.kukala.ir
+  - host: prod-mobile.kukala.ir
     http:
       paths:
       - pathType: Prefix
@@ -26,7 +26,7 @@ spec:
             port: 
               number: 80
     
-  - host: pr-admin.kukala.ir
+  - host: prod-admin.kukala.ir
     http:
       paths:
       - pathType: Prefix
@@ -36,7 +36,7 @@ spec:
             name: wpms
             port: 
               number: 80
-  - host: pr.kukala.ir
+  - host: prod.kukala.ir
     http:
       paths:
       - pathType: Prefix
