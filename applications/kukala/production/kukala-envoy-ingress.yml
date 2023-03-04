@@ -82,7 +82,7 @@ data:
                     domains: ["prod.kukala.ir"]
                     routes:
                       - match:
-                          prefix: /panel/
+                          prefix: /panel
                         route:
                           cluster: kukala_admin_cl
                       - match:
