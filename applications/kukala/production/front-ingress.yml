@@ -17,7 +17,7 @@ spec:
       - prod-desktop.kukala.ir
       secretName: kukala-tls
   rules:
-  - host: prod-mobile.kukala.ir
+  - host: test-mobile.kukala.ir
     http:
       paths:
       - pathType: Prefix
@@ -28,7 +28,7 @@ spec:
             port: 
               number: 80
     
-  - host: prod-admin.kukala.ir
+  - host: test-admin.kukala.ir
     http:
       paths:
       - pathType: Prefix
