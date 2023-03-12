@@ -79,7 +79,7 @@ data:
                 name: local_route
                 virtual_hosts:
                   - name: prod_kukala_ir
-                    domains: ["kukala.ir"]
+                    domains: ["test.kukala.ir"]
                     routes:
                       - match:
                           prefix: /panel
