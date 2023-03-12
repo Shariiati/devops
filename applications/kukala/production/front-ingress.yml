@@ -9,6 +9,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts: 
+      - test.kukala.ir
       - kukala.ir
       - prod.kukala.ir
       - prod-mobile.kukala.ir
@@ -37,7 +38,7 @@ spec:
             name: wpms
             port: 
               number: 80
-  - host: kukala.ir
+  - host: test.kukala.ir
     http:
       paths:
       - pathType: Prefix
