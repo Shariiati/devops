@@ -9,6 +9,7 @@ spec:
   ingressClassName: nginx
   tls:
     - hosts: 
+      - www.kukala.ir
       - test.kukala.ir
       - kukala.ir
       - prod.kukala.ir
@@ -39,6 +40,16 @@ spec:
             port: 
               number: 80
   - host: kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kukala-envoy-ingress
+            port: 
+              number: 80
+  - host: www.kukala.ir
     http:
       paths:
       - pathType: Prefix
