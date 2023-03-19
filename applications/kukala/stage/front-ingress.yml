@@ -12,7 +12,6 @@ spec:
       - stage-mobile.kukala.ir
       - stage-admin.kukala.ir
       - stage-desktop.kukala.ir
-      - eznet.kukala.ir
       secretName: kukala-cert
   rules:
   - host: stage-mobile.kukala.ir
@@ -46,13 +45,4 @@ spec:
             name: kukala-envoy-ingress
             port: 
               number: 80
-  - host: eznet.kukala.ir
-    http:
-      paths:
-      - pathType: Prefix
-        path: "/"
-        backend:
-          service:
-            name: eznet
-            port: 
-              number: 80
+
