@@ -49,8 +49,6 @@ spec:
             name: kukala-envoy-ingress
             port: 
               number: 80
-        nginx:
-          rewrite-target: https://www.kukala.ir$request_uri
   - host: www.kukala.ir
     http:
       paths:
