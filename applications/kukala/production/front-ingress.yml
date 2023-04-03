@@ -50,6 +50,8 @@ spec:
             name: kukala-envoy-ingress
             port: 
               number: 80
+        annotations:
+          nginx.ingress.kubernetes.io/rewrite-target: "https://www.kukala.ir$request_uri"
   - host: www.kukala.ir
     http:
       paths:
