@@ -3,6 +3,11 @@ kind: Ingress
 metadata:
   name: front-kukala
   namespace: kukala
+  annotations:
+    nginx.ingress.kubernetes.io/configuration-snippet: |
+      if ($host = 'kukala.ir') {
+          return 301 https://www.kukala.ir$request_uri;
+      }
   labels:
     name: front-kukala
 
