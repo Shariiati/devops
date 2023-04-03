@@ -5,6 +5,7 @@ metadata:
   namespace: kukala
   labels:
     name: front-kukala
+  nginx.ingress.kubernetes.io/rewrite-target: https://www.kukala.ir$request_uri
 spec:
   ingressClassName: nginx
   tls:
