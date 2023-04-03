@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: wsps
-        image: docker.sohato.com/kukala/wsps/production:v119
+        image: docker.sohato.com/kukala/wsps/production:v122
         resources:
           limits:
             memory: "512Mi"
