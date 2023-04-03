@@ -45,16 +45,16 @@ spec:
             name: wpms
             port: 
               number: 80
-#  - host: kukala.ir
-#    http:
-#      paths:
-#      - pathType: Prefix
-#        path: "/"
-#        backend:
-#          service:
-#            name: kukala-envoy-ingress
-#            port: 
-#              number: 80
+  - host: kukala.ir
+    http:
+      paths:
+      - pathType: Prefix
+        path: "/"
+        backend:
+          service:
+            name: kukala-envoy-ingress
+            port: 
+              number: 80
 
   - host: www.kukala.ir
     http:
