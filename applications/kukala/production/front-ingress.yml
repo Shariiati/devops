@@ -8,6 +8,9 @@ metadata:
       if ($host = 'kukala.ir') {
           return 301 https://www.kukala.ir$request_uri;
       }
+    nginx.ingress.kubernetes.io/proxy-connect-timeout: "10s"
+    nginx.ingress.kubernetes.io/proxy-read-timeout: "60s"
+    nginx.ingress.kubernetes.io/proxy-send-timeout: "60s"
   labels:
     name: front-kukala
 
