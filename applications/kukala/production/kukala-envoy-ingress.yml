@@ -85,6 +85,7 @@ data:
                           prefix: /panel
                         route:
                           cluster: kukala_admin_cl
+                        timeout: 30s
                       - match:
                           prefix: /
                           headers:
@@ -94,12 +95,14 @@ data:
                               regex: ".*Mobile.*"     
                         route:
                           cluster: kukala_mobile_cl
-                          prefix_rewrite: "/" 
+                          prefix_rewrite: "/"
+                        timeout: 30s 
                       - match:
                           prefix: /
                         route:
                           cluster: kukala_desktop_cl
                           prefix_rewrite: "/"
+                        timeout: 30s
 
               http_filters:                           
               - name: envoy.filters.http.router
