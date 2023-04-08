@@ -220,7 +220,7 @@ spec:
   selector:
     matchLabels:
       app: kukala-envoy-ingress
-  replicas: 1
+  replicas: 3
   template:
     metadata:
       labels:
