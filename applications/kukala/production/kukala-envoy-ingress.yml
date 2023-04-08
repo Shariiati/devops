@@ -157,7 +157,7 @@ data:
 
 
         - name: kukala_desktop_cl
-          connect_timeout: 5s
+          connect_timeout: 60s
           circuit_breakers:
             thresholds:
               max_requests: 1000000
@@ -174,7 +174,7 @@ data:
                   address:
                     socket_address: { address: wsps, port_value: 80 }      
         - name: kukala_mobile_cl
-          connect_timeout: 5s
+          connect_timeout: 60s
           circuit_breakers:
             thresholds:
               max_requests: 1000000
@@ -191,7 +191,7 @@ data:
                   address:
                     socket_address: { address: msps, port_value: 80 }            
         - name: kukala_admin_cl
-          connect_timeout: 5s
+          connect_timeout: 60s
           circuit_breakers:
             thresholds:
               max_requests: 1000000
