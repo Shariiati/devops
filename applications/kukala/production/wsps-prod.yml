@@ -15,9 +15,6 @@ spec:
       containers:
       - name: wsps
         image: docker.sohato.com/kukala/wsps/production:v132
-        resources:
-          limits:
-            memory: "512Mi"
         ports:
         - containerPort: 80
 ---
