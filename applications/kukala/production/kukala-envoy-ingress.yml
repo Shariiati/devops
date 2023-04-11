@@ -137,7 +137,7 @@ data:
 
       clusters:
         - name: envoy-kukala
-          connect_timeout: 0.25s
+          connect_timeout: 60s
           type: STATIC
           load_assignment: {
             cluster_name: envoy-kukala,
@@ -174,7 +174,6 @@ data:
                   address:
                     socket_address: { address: wsps, port_value: 80 }      
         - name: kukala_mobile_cl
-          connect_timeout: 60s
           circuit_breakers:
             thresholds:
               max_requests: 1000000
