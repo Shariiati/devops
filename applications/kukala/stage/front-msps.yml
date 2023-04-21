@@ -20,6 +20,9 @@ spec:
             memory: "512Mi"
         ports:
         - containerPort: 80
+        env:
+          - name: NODE_DEBUG_LEVEL
+            value: error
 ---
 apiVersion: v1
 kind: Service
