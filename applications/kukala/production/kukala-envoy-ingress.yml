@@ -254,19 +254,19 @@ spec:
               subPath: envoy.yaml 
                         
 ---
-# apiVersion: monitoring.coreos.com/v1
-# kind: ServiceMonitor
-# metadata:
-#   name: kukala-envoy-ingress
-#   namespace: monitoring
-# spec:
-#   endpoints:
-#   - port: prometheus
-#     interval: 5s
-#   jobLabel: kukala-envoy-ingress
-#   namespaceSelector:
-#     matchNames:
-#     - gateway
-#   selector:
-#     matchLabels:
-#       app: kukala-envoy-ingress
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: kukala-envoy-ingress
+  namespace: monitoring
+spec:
+  endpoints:
+  - port: prometheus
+    interval: 5s
+  jobLabel: kukala-envoy-ingress
+  namespaceSelector:
+    matchNames:
+    - kukala
+  selector:
+    matchLabels:
+      app: kukala-envoy-ingress
