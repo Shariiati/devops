@@ -259,6 +259,8 @@ kind: ServiceMonitor
 metadata:
   name: kukala-envoy-ingress
   namespace: monitoring
+labels:
+  release: prometheus-grafana-stack
 spec:
   endpoints:
   - port: prometheus
