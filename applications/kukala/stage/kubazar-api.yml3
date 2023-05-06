@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kubazar-eznet-api
-        image: docker.sohato.com/kubazar/eznet.workerservice/stage:v10
+        image: docker.sohato.com/:v10
         resources:
           limits:
             memory: "512Mi"
