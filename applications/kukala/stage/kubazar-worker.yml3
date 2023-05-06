@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kubazar-eznet-worker
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kubazar-eznet-worker
+  template:
+    metadata:
+      labels:
+        app: kubazar-eznet-worker
+    spec:
+      containers:
+      - name: kubazar-eznet-worker
+        image: docker.sohato.com/:v10
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kubazar-eznet-worker
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kubazar-eznet-worker
+  ports:
+  - port: 80
+    targetPort: 80
