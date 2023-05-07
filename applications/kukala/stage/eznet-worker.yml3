@@ -1,37 +1,35 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: msps
+  name: kubazar-eznet-worker
   namespace: stage-kukala
 spec:
   selector:
     matchLabels:
-      app: msps
+      app: kubazar-eznet-worker
   template:
     metadata:
       labels:
-        app: msps
+        app: kubazar-eznet-worker
     spec:
       containers:
-      - name: msps
-        image: docker.sohato.com/kukala/msps/stage:v560
+      - name: kubazar-eznet-worker
+        image: docker.sohato.com/kubazar/eznet/stage-worker:v10
         resources:
           limits:
             memory: "512Mi"
+            cpu: "500m"
         ports:
         - containerPort: 80
-        env:
-          - name: NODE_DEBUG_LEVEL
-            value: error
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: msps
+  name: kubazar-eznet-worker
   namespace: stage-kukala
 spec:
   selector:
-    app: msps
+    app: kubazar-eznet-worker
   ports:
   - port: 80
-    targetPort: 3000
+    targetPort: 80
