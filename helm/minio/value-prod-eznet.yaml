@@ -1,0 +1,20 @@
+global:
+  imageRegistry: "docker.sohato.com"
+  storageClass: "zfs-hdd"
+
+ingress:
+  enabled: true
+  hostname: s3.kubazar.ir
+
+
+apiIngress:
+  enabled: true
+  hostname: s3-api.kubazar.ir
+
+
+persistence:
+  size: 20Gi
+
+metrics:
+  serviceMonitor:
+    enabled: true  
