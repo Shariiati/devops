@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kubazar-eznet-worker
-        image: 
+        image: docker.sohato.com/kubazar/eznet/stage-worker:v22
         resources:
           limits:
             memory: "512Mi"
