@@ -4,17 +4,20 @@ global:
 
 ingress:
   enabled: true
-  hostname: s3.kubazar.ir
-
+  hostname: s3.sohato.com
+  ingressClassName: nginx
+  tls: true
 
 apiIngress:
   enabled: true
-  hostname: s3-api.kubazar.ir
-
-
+  hostname: s3-api.sohato.com
+  ingressClassName: nginx
+  tls: true
 persistence:
-  size: 20Gi
+  size: 25Gi
 
 metrics:
   serviceMonitor:
-    enabled: true  
+    enabled: true
+
+  
