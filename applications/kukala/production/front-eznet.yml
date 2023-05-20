@@ -1,37 +1,34 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: msps
-  namespace: stage-kukala
+  name: kubazar-front
+  namespace: kubazar
 spec:
   selector:
     matchLabels:
-      app: msps
+      app: kubazar-front
   template:
     metadata:
       labels:
-        app: msps
+        app: kubazar-front
     spec:
       containers:
-      - name: msps
-        image: docker.sohato.com/kukala/msps/stage:v606
+      - name: kubazar-front
+        image: docker.sohato.com/kukala/eznet/prod:v33
         resources:
           limits:
             memory: "512Mi"
         ports:
         - containerPort: 80
-        env:
-          - name: NODE_DEBUG_LEVEL
-            value: error
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: msps
-  namespace: stage-kukala
+  name: kubazar-front
+  namespace: kubazar
 spec:
   selector:
-    app: msps
+    app: kubazar-front
   ports:
   - port: 80
     targetPort: 3000

@@ -21,8 +21,10 @@ apiIngress:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "120"   
 
 persistence:
-  size: 20Gi
+  size: 25Gi
 
 metrics:
   serviceMonitor:
-    enabled: true  
+    enabled: true
+
+  
