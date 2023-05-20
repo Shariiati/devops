@@ -4,7 +4,9 @@ global:
 
 ingress:
   enabled: true
-  hostname: s3.kubazar.ir
+  hostname: s3.sohato.com
+  ingressClassName: nginx
+  tls: true
   annotations: 
     nginx.ingress.kubernetes.io/proxy-body-size: 512m
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "120"
@@ -14,7 +16,9 @@ ingress:
 
 apiIngress:
   enabled: true
-  hostname: s3-api.kubazar.ir
+  hostname: s3.sohato.com
+  ingressClassName: nginx
+  tls: true
   annotations: 
     nginx.ingress.kubernetes.io/proxy-body-size: 512m
     nginx.ingress.kubernetes.io/proxy-connect-timeout: "120"
