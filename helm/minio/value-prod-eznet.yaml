@@ -16,7 +16,7 @@ ingress:
 
 apiIngress:
   enabled: true
-  hostname: s3.sohato.com
+  hostname: s3-api.sohato.com
   ingressClassName: nginx
   tls: true
   annotations: 
