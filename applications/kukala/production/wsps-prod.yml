@@ -4,6 +4,7 @@ metadata:
   name: wsps
   namespace: kukala
 spec:
+  replicas: 3
   selector:
     matchLabels:
       app: wsps

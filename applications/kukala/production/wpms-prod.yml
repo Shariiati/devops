@@ -4,6 +4,7 @@ metadata:
   name: wpms
   namespace: kukala
 spec:
+  replicas: 3      
   selector:
     matchLabels:
       app: wpms
