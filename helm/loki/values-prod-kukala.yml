@@ -1,0 +1,16 @@
+global:
+  image:
+    # -- Overrides the Docker registry globally for all images
+    registry: docker.sohato.com
+
+write:    
+  persistence:
+    size: 10Gi
+    storageClass: zfs-hdd
+
+
+
+backend:
+   persistence:
+    size: 10Gi
+    storageClass: zfs-hdd
