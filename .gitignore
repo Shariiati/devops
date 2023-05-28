@@ -1,0 +1,12 @@
+.DS_Store
+*.vscode
+*.DS_Store
+*.tar.gz
+*.tgz
+*.zip
+*.crt
+*.pem
+*.csr
+*.pfx
+*.jar
+config-devops

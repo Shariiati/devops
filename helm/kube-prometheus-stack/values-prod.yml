@@ -1,0 +1,105 @@
+global:
+
+  imageRegistry: "docker.sohato.com"
+
+alertmanager:
+
+  enabled: true
+
+  config:
+    global:
+      resolve_timeout: 5m
+    inhibit_rules:
+      - source_matchers:
+          - 'severity = critical'
+        target_matchers:
+          - 'severity =~ warning|info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'severity = warning'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+          - 'alertname'
+      - source_matchers:
+          - 'alertname = InfoInhibitor'
+        target_matchers:
+          - 'severity = info'
+        equal:
+          - 'namespace'
+    route:
+      group_by: ['namespace']
+      group_wait: 30s
+      group_interval: 5m
+      repeat_interval: 12h
+      receiver: 'null'
+      routes:
+      - receiver: 'null'
+        matchers:
+          - alertname =~ "InfoInhibitor|Watchdog"
+    receivers:
+    - name: 'null'
+    templates:
+    - '/etc/alertmanager/config/*.tmpl'
+
+
+grafana:
+  enabled: true
+
+  defaultDashboardsTimezone: asia/tehran
+
+  adminPassword: prom-operator
+
+  ingress:
+
+    enabled: true
+
+    hosts:
+      - prod-grafana.sohato.com
+
+    path: /
+
+    tls: 
+    - secretName: star-sohato-com
+      hosts:
+      - prod-grafana.sohato.com
+
+
+prometheus:
+  enabled: true
+  ingress:
+    enabled: true
+
+    hosts:
+      - prod-prometheus.sohato.com
+
+
+  prometheusSpec:
+
+    storageSpec: 
+      volumeClaimTemplate:
+        spec:
+          storageClassName: zfs-hdd
+          accessModes: ["ReadWriteOnce"]
+          resources:
+            requests:
+              storage: 50Gi
+   
+    additionalScrapeConfigs:
+        - job_name: node-exporter
+          metrics_path: /metrics
+          scrape_interval: 10s
+          scrape_timeout: 10s
+          static_configs:
+            - targets:
+              - 192.168.103.150:9100
+   
+   
+    
+
+
+ 
+ 
