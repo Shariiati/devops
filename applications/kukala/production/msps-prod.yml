@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: msps
-        image: docker.sohato.com/kukala/msps/production:v521
+        image: docker.sohato.com/kukala/msps/production:v698
         ports:
         - containerPort: 80
 ---
