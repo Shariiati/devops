@@ -88,7 +88,7 @@ data:
                       - match:
                           prefix: /
                         route:
-                          cluster: kukala_desktop_cl
+                          cluster: kukala_mobile_cl
                           prefix_rewrite: "/"
 
               http_filters:                           
