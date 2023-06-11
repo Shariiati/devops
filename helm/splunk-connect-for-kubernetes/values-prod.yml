@@ -1,0 +1,228 @@
+global:
+
+  kubernetes:
+    # The cluster name used to tag logs. Default is cluster_name
+    clusterName: "kukala-prod"
+
+  # Local splunk configurations
+  splunk:
+    # Configurations for HEC (HTTP Event Collector)
+    hec:
+      # host is required and should be provided by user
+      host: fsphec.l.mofid.dc
+      # port to HEC, optional, default 8088
+      port: 8088
+      # token is required and should be provided by user
+      token: f37df4c9-e6e3-40fb-b1e6-f2cb901eed15
+      # protocol has two options: "http" and "https", default is "https"
+      # For self signed certificate leave this field blank
+      protocol: http
+      # Allow specifying the HEC endpoint to use, default is "/services/collector"
+      endpoint:
+      # Instead of providing host, port, and protocol, you can provide full url for splunk. For example: https://mydomain.com:8088/apps/splunk
+      fullUrl:
+      # indexName tells which index to use, this is optional. If it's not present, will use "main".
+      indexName: kukala-logs
+splunk-kubernetes-logging:
+  enabled: true
+  hec:
+    # host is required and should be provided by user
+    host: fsphec.l.mofid.dc
+    # port to HEC, optional, default 8088
+    port: 8088
+    # token is required and should be provided by user
+    token: f37df4c9-e6e3-40fb-b1e6-f2cb901eed15
+    # protocol has two options: "http" and "https", default is "https"
+    # For self signed certificate leave this field blank
+    protocol: http
+    # Allow specifying the HEC endpoint to use, default is "/services/collector"
+    endpoint:
+    # Instead of providing host, port, and protocol, you can provide full url for splunk. For example: https://mydomain.com:8088/apps/splunk
+    fullUrl:
+    # indexName tells which index to use, this is optional. If it's not present, will use "main".
+    indexName: kukala-logs
+  logs:
+    docker:
+      from:
+        journald:
+          unit: docker.service
+      sourcetype: kube:docker
+    kubelet: &glog
+      from:
+        journald:
+          unit: kubelet.service
+      multiline:
+        firstline: /^\w[0-1]\d[0-3]\d/
+      sourcetype: kube:kubelet
+    etcd:
+      from:
+        pod: etcd-server
+        container: etcd-container
+    etcd-minikube:
+      from:
+        pod: etcd-minikube
+        container: etcd
+    etcd-events:
+      from:
+        pod: etcd-server-events
+        container: etcd-container
+    kube-apiserver:
+      <<: *glog
+      from:
+        pod: kube-apiserver
+      sourcetype: kube:kube-apiserver
+    kube-scheduler:
+      <<: *glog
+      from:
+        pod: kube-scheduler
+      sourcetype: kube:kube-scheduler
+    kube-controller-manager:
+      <<: *glog
+      from:
+        pod: kube-controller-manager
+      sourcetype: kube:kube-controller-manager
+    kube-proxy:
+      <<: *glog
+      from:
+        pod: kube-proxy
+      sourcetype: kube:kube-proxy
+    kubedns:
+      <<: *glog
+      from:
+        pod: kube-dns
+      sourcetype: kube:kubedns
+    dnsmasq:
+      <<: *glog
+      from:
+        pod: kube-dns
+      sourcetype: kube:dnsmasq
+    dns-sidecar:
+      <<: *glog
+      from:
+        pod: kube-dns
+        container: sidecar
+      sourcetype: kube:kubedns-sidecar
+    dns-controller:
+      <<: *glog
+      from:
+        pod: dns-controller
+      sourcetype: kube:dns-controller
+    kube-dns-autoscaler:
+      <<: *glog
+      from:
+        pod: kube-dns-autoscaler
+        container: autoscaler
+      sourcetype: kube:kube-dns-autoscaler
+    kube-audit:
+      from:
+        file:
+          path: /var/log/kube-apiserver-audit.log
+      timestampExtraction:
+        format: "%Y-%m-%dT%H:%M:%SZ"
+      sourcetype: kube:apiserver-audit  
+
+      
+
+  tolerations:
+    - key: node-role.kubernetes.io/controlplane
+      operator: Exists
+      effect: NoSchedule
+    - key: node.kubernetes.io
+      operator: Exists
+      effect: NoSchedule
+
+
+splunk-kubernetes-objects:
+  # = Kubernetes Connection Configs =
+  kubernetes:
+    # the URL for calling kubernetes API, by default it will be read from the environment variables
+    url:
+    # if insecureSSL is set to true, insecure HTTPS API call is allowed, default false
+    insecureSSL: true
+
+  # = Configure Splunk HEC connection =
+  splunk:
+    hec:
+      # host to the HEC endpoint [REQUIRED]
+      host: fsphec.l.mofid.dc
+      # token for the HEC [REQUIRED]
+      token:  ac7b098c-653d-4023-ad2b-9addd475c4d7
+      # protocol has two options: "http" and "https". Default value: "https"
+      # For self signed certificate leave this field blank
+      protocol: http
+      # port to HEC, optional, default 8088
+      port: 8088
+      # Instead of providing host, port, and protocol, you can provide full url for splunk. For example: https://mydomain.com:8088/apps/splunk
+      fullUrl:
+      # indexName tells which index to use, this is optional. If it's not present, will use "main".
+      indexName: sre-objects
+
+
+
+  tolerations:
+    - key: node-role.kubernetes.io/controlplane
+      operator: Exists
+      effect: NoSchedule
+    - key: node.kubernetes.io
+      operator: Exists
+      effect: NoSchedule
+
+splunk-kubernetes-metrics:
+  enabled: false
+  splunk:
+    # Configurations for HEC (HTTP Event Collector)
+    hec:
+      # hostname/ip of HEC, REQUIRED.
+      host: fsphec.l.mofid.dc
+      # port to HEC, OPTIONAL. Default value: 8088
+      port: 8088
+      # the HEC token, REQUIRED.
+      token: d4e22bf6-74c8-4954-aba4-d6832d2ed75b
+      # protocol has two options: "http" and "https". Default value: "https"
+      # For self signed certificate leave this field blank
+      protocol: http
+      # Instead of providing host, port, and protocol, you can provide full url for splunk. For example: https://mydomain.com:8088/apps/splunk
+      fullUrl:
+      # indexName tells which index to use, OPTIONAL. If it's not present, will use "main".
+      indexName: sre-metrics
+
+
+  resources:
+    fluent:
+      limits:
+        cpu: 1000m
+        memory: 600Mi
+      requests:
+        cpu: 200m
+        memory: 300Mi
+
+  tolerations:
+    - key: node-role.kubernetes.io/controlplane
+      operator: Exists
+      effect: NoSchedule
+    - key: node.kubernetes.io
+      operator: Exists
+      effect: NoSchedule
+
+
+  # = Kubernetes Connection Configs =
+  kubernetes:
+    # The hostname or IP address that kubelet will use to connect to. If not supplied, status.hostIP of the node is used to fetch metrics from the Kubelet API (via the $KUBERNETES_NODE_IP environment variable).
+    # Default is "#{ENV['KUBERNETES_NODE_IP']}"
+    kubeletAddress:
+    # The port that kubelet is listening on. Default is 10250
+    kubeletPort:
+    # The port that is used to get the metrics using apiserver proxy using ssl for the metrics aggregator
+    kubeletPortAggregator:
+    # This option is used to get the metrics from summary api on each kubelet using ssl
+    useRestClientSSL: true
+    # if insecureSSL is set to true, insecure HTTPS API call is allowed, default false
+    insecureSSL: true
+# splunk-kubernetes-logging:
+#   tolerations:
+#     - key: node-role.kubernetes.io/controlplane
+#       operator: Exists
+#       effect: NoSchedule
+#     - key: node.kubernetes.io
+#       operator: Exists
+#       effect: NoSchedule

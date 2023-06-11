@@ -14,3 +14,5 @@ backend:
    persistence:
     size: 10Gi
     storageClass: zfs-hdd
+minio:
+  enabled: true    
