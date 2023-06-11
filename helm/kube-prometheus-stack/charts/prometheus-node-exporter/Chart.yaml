@@ -11,8 +11,10 @@ maintainers:
   name: gianrubio
 - email: zanhsieh@gmail.com
   name: zanhsieh
+- email: rootsandtrees@posteo.de
+  name: zeritti
 name: prometheus-node-exporter
 sources:
 - https://github.com/prometheus/node_exporter/
 type: application
-version: 4.14.0
+version: 4.17.5
