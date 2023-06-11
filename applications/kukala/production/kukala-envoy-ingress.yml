@@ -87,18 +87,8 @@ data:
                           cluster: kukala_admin_cl
                       - match:
                           prefix: /
-                          headers:
-                          - name: "User-Agent"                      
-                            safe_regex_match:
-                              google_re2: {}
-                              regex: ".*Mobile.*"     
                         route:
                           cluster: kukala_mobile_cl
-                          prefix_rewrite: "/" 
-                      - match:
-                          prefix: /
-                        route:
-                          cluster: kukala_desktop_cl
                           prefix_rewrite: "/"
 
               http_filters:                           
