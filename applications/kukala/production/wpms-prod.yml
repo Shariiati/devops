@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: wpms
-        image: docker.sohato.com/kukala/wpms/production:v116
+        image: docker.sohato.com/kukala/wpms/production:v125
         ports:
         - containerPort: 80
 ---
