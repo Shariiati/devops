@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: eznet
-        image: docker.sohato.com/kukala/eznet/stage:v87
+        image: docker.sohato.com/kukala/eznet/stage:v88
         resources:
           limits:
             memory: "512Mi"
