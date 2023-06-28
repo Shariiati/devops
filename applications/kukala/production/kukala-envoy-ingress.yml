@@ -164,6 +164,7 @@ data:
                   address:
                     socket_address: { address: wsps, port_value: 80 }      
         - name: kukala_mobile_cl
+          connect_timeout: 360s
           circuit_breakers:
             thresholds:
               max_requests: 1000000
