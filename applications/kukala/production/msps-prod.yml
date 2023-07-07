@@ -16,6 +16,10 @@ spec:
       containers:
       - name: msps
         image: docker.sohato.com/kukala/msps/production:v825
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
         ports:
         - containerPort: 80
 ---
