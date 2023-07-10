@@ -1,0 +1,28 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+  labels:
+    argocd.argoproj.io/instance: stage-kukala
+    name: python-fastapi
+  name: python-fastapi
+  namespace: stage-kukala
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: fast-api.kukala.ir
+    http:
+      paths:
+      - backend:
+          service:
+            name: kukala-python-idas-image-search-fastapi
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
+  tls:
+  - hosts:
+    - fast-api.kukala.ir
+    secretName: kukala-cert
+status:
+  loadBalancer:
