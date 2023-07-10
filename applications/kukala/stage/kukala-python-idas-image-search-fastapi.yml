@@ -1,0 +1,38 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kukala-python-idas-image-search-fastapi
+  namespace: stage-kukala
+spec:
+  selector:
+    matchLabels:
+      app: kukala-python-idas-image-search-fastapi
+  template:
+    metadata:
+      labels:
+        app: kukala-python-idas-image-search-fastapi
+    spec:
+      containers:
+      - name: kukala-python-idas-image-search-fastapi
+        image: docker.sohato.com/kukala/kukala-python-idas-image-search-fastapi/stage:v29
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+        ports:
+        - containerPort: 80
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: kukala-python-idas-image-search-fastapi
+  namespace: stage-kukala
+spec:
+  selector:
+    app: kukala-python-idas-image-search-fastapi
+  ports:
+  - port: 80
+    targetPort: 80
+
+
+
