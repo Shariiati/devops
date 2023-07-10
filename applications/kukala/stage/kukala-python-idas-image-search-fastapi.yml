@@ -32,7 +32,7 @@ spec:
     app: kukala-python-idas-image-search-fastapi
   ports:
   - port: 80
-    targetPort: 80
+    targetPort: 4040
 
 
 
