@@ -17,8 +17,8 @@ spec:
         image: docker.sohato.com/kukala/kukala-python-idas-image-search-fastapi/stage:v30
         resources:
           limits:
-            memory: "512Mi"
-            cpu: "500m"
+            memory: "1024i"
+            cpu: "1000m"
         ports:
         - containerPort: 4040
 ---
