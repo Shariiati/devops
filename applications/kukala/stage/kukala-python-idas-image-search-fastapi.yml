@@ -4,7 +4,7 @@ metadata:
   name: kukala-python-idas-image-search-fastapi
   namespace: stage-kukala
 spec:
-  replica: 3
+  replicas: 3
   selector:
     matchLabels:
       app: kukala-python-idas-image-search-fastapi
