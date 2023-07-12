@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
       - name: kukala-python-idas-image-search-fastapi
-        image: docker.sohato.com/kukala/kukala-python-idas-image-search-fastapi/stage:v31
+        image: docker.sohato.com/kukala/kukala-python-idas-image-search-fastapi/stage:v32
         resources:
           limits:
             memory: "1024Mi"
