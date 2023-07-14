@@ -16,6 +16,12 @@ spec:
       containers:
       - name: wpms
         image: docker.sohato.com/kukala/wpms/production:v127
+        resources:
+          limits:
+            memory: "512Mi"
+            cpu: "500m"
+            ephemeral-storage: "2Gi"
+
         ports:
         - containerPort: 80
 ---
