@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: kubazar-front
-        image: docker.sohato.com/kukala/eznet/prod:v146
+        image: docker.sohato.com/kukala/eznet/prod:v147
         resources:
           limits:
             memory: "512Mi"
