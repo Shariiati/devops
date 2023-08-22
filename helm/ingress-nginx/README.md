@@ -1,6 +1,3 @@
-Use  ```console
-helm install -n ingress-nginx ingress-nginx -f values.yaml . 
-```
 # ingress-nginx
 
 [ingress-nginx](https://github.com/kubernetes/ingress-nginx) Ingress controller for Kubernetes using NGINX as a reverse proxy and load balancer
