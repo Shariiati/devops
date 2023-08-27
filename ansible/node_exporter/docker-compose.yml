@@ -1,0 +1,11 @@
+version: '3'
+services:
+  node-exporter:
+    image: prom/node-exporter
+    ports:
+      - "9100:9100"
+    volumes:
+      - /home/soha/node-exporter-data:/host
+    restart: unless-stopped  # This line sets the restart policy
+volumes:
+  node-exporter-data:
