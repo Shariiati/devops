@@ -1,0 +1,30 @@
+---
+- hosts: all
+  name: node_exporter
+  become: true
+  tasks:
+   - name: installing docker and docker-compose
+     apt:
+         name: [docker.io, docker-compose]
+         state: present
+   - name: check docker is active
+     systemd:
+      name: docker
+      state: started
+      enabled: yes
+
+   - name: create the dir for node-exporter data
+     command: |
+        mkdir /home/soha/node_exporter/
+        sleep 1
+        mkdir /home/soha/node_exporter/node_exporter-data
+
+   - name: copy the compose file
+     copy:
+        src: /home/soha/gpttask/devops/node-exporter/docker-compose.yml
+        dest: /home/soha/node_exporter/docker-compose.yml
+
+
+   - name: running the node_exporter docker-compose
+     command:
+        docker-compose -f /home/soha/node_exporter/docker-compose.yml up -d
