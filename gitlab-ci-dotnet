@@ -1,0 +1,76 @@
+workflow:
+    rules:
+      - if:  $CI_COMMIT_REF_NAME == "main"
+        variables:
+          REPO_DIR: "prod"
+      - if:  $CI_COMMIT_REF_NAME == "develop"
+        variables:
+          REPO_DIR: "stage"
+  
+stages:
+    - build
+    - deploy
+variables:
+    PIPELINE_ID: $CI_PIPELINE_IID
+    PRIME_DIR: $PRIME_DIR
+    GITLAB_CLONE_PASSWORD: $GITLAB_CLONE_PASSWORD
+    GITLAB_CLONE_USER: $GITLAB_CLONE_USER
+  
+build_push_image:
+    stage: build
+    tags:
+      - ssh
+      - kukala
+    
+    script:
+      - cd $PRIME_DIR
+      - dotnet restore --configfile nuget.config
+      - dotnet publish -c Release -o ./app/publish --configfile nuget.config --no-restore
+      - docker build --tag $REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/$REPO_DIR:v$PIPELINE_ID --tag $REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/${REPO_DIR}:latest -f ./Dockerfile $PWD/
+      - export LATEST_IMAGE=$REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/$REPO_DIR:latest
+      - export TAGGED_IMAGE=$REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/$REPO_DIR:v$PIPELINE_ID
+      - echo "$LATEST_IMAGE" > latest-image.txt
+      - echo "$TAGGED_IMAGE" > tagged-image.txt
+      - docker login -u $REPO_USER -p $REPO_PASSWORD $REPO_ADDRESS
+      - docker push "$LATEST_IMAGE"
+      - docker push "$TAGGED_IMAGE"
+  
+    artifacts:
+      paths:
+        - $PWD/$PRIME_DIR/latest-image.txt
+        - $PWD/$PRIME_DIR/tagged-image.txt
+    retry: 2
+
+update_manifest_file:
+    stage: deploy
+    tags:
+     - ssh
+     - kukala
+    needs:
+      - build_push_image
+    dependencies:
+      - build_push_image
+    before_script:
+      # - if [ ! -z "$(echo ,$DEPLOY_USERS, | grep ,$GITLAB_USER_ID,)" ]; then
+      #         echo "ok";
+      #     else
+      #         echo "your are not allowed to deploy";
+      #         exit 1;
+      #   fi
+      - cd $PRIME_DIR
+      - export LATEST_IMAGE=$(cat latest-image.txt)
+      - export TAGGED_IMAGE=$(cat tagged-image.txt)
+      - rm -rf /tmp/devops
+      - cd /tmp
+      - git config --global user.email "gitlab@gitlab.sohato.com"
+      - git config --global user.name "GitLab"
+    script: 
+      - git clone https://${GITLAB_CLONE_USER}:${GITLAB_CLONE_PASSWORD}@gitlab.sohato.com/${GROUP_NAME}/devops.git
+      - ls && pwd
+      - cd ./devops/applications/${GROUP_NAME}/${REPO_DIR}
+      - 'sed -i "s|image:.*|image: ${TAGGED_IMAGE}|g" ${CI_PROJECT_NAME}.yml'
+      - git commit -am "update ${CI_PROJECT_NAME}.yml  version to v${CI_PIPELINE_IID} in ${GROUP_NAME} ${REPO_DIR} -- deploy by user ${GITLAB_USER_NAME}" && git push origin
+      - cd /tmp
+      - rm -rf devops
+      - export COMMIT_TIME=$(date +"%Y.%m.%d %H:%M:%S")
+      - echo "update ${CI_PROJECT_NAME}.yml and ${CI_PROJECT_NAME}-worker.yml version to v${CI_PIPELINE_IID} at $COMMIT_TIME" by ${GITLAB_USER_NAME};
