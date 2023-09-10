@@ -1,0 +1,71 @@
+stages:
+  - build
+  - deploy
+variables:
+  TAG: $CI_PIPELINE_IID
+  GITLAB_CLONE_PASSWORD: $GITLAB_CLONE_PASSWORD
+  GITLAB_CLONE_USER: $GITLAB_CLONE_USER
+  CLONE_USER: $CLONE_USER
+  CLONE_PASSWORD: $CLONE_PASSWORD
+
+
+before_script:
+  - if [ "$CI_COMMIT_REF_NAME" == "develop" ]; then
+           REPO_DIR="stage";
+    elif [ "$CI_COMMIT_REF_NAME" == "master" ]; then
+           REPO_DIR="prod";        
+    fi
+
+build-stage:
+  stage: build
+  tags:
+    - ssh
+    - kukala
+
+  script:
+    - docker login -u $REPO_USER -p $REPO_PASSWORD $REPO_ADDRESS
+  #  - npm config set registry  https://repo.sohato.com/repository/npm-remote/
+    - npm cache clean --force
+    - npm install --legacy-peer-deps
+    - npm run build:staging
+    - docker build --tag $REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/$REPO_DIR:v$TAG --build-arg NODE_ENV=development -f ./Dockerfile $PWD/
+    - docker push $REPO_ADDRESS/$GROUP_NAME/$CI_PROJECT_NAME/$REPO_DIR:v$TAG
+  retry: 2
+  only:
+    refs:
+      - develop
+deploy-stage:
+    stage: deploy
+    variables:
+      DEPLOYMENT_FILE: front-msps.yml
+      PROJECT_DIR: devops/applications/kukala/stage
+    tags:
+     - ssh
+     - kukala
+    needs:
+      - build-stage
+    before_script:
+      # - if [ ! -z "$(echo ,$DEPLOY_USERS, | grep ,$GITLAB_USER_ID,)" ]; then
+      #         echo "ok";
+      #     else
+      #         echo "your are not allowed to deploy";
+      #         exit 1;
+      #   fi
+      - rm -rf /tmp/devops
+      - cd /tmp
+      - git config --global user.email "gitclone@gitlab.sohato.com"
+      - git config --global user.name "gitclone"
+    script: 
+      - git clone https://${CLONE_USER}:${CLONE_PASSWORD}@gitlab.sohato.com/${GROUP_NAME}/devops.git
+      - cd $PROJECT_DIR
+      - sed -i -E "s@(image:.+)/stage:v[0-9]{1,}(.*)@\1/stage:v${CI_PIPELINE_IID}\2@g" ${DEPLOYMENT_FILE} 
+      - git commit -am "update ${CI_PROJECT_NAME}.yml version to v${CI_PIPELINE_IID}  -- deploy by user ${GITLAB_USER_NAME}" && git push origin
+      - cd /tmp
+      - rm -rf devops
+      - echo "update ${DEPLOYMENT_FILE} version to v${CI_PIPELINE_IID} at $COMMIT_TIME" by ${GITLAB_USER_NAME};
+
+
+
+
+
+
