@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <packageSources>
+        <add key="Sohato" value="https://repo.sohato.com/repository/nuget.org-proxy/index.json" />
+    </packageSources>
+
+    <!-- Used to store credentials -->
+    <packageSourceCredentials>
+    <Sohato>
+        <add key="Username" value="nugetusr" />
+        <add key="ClearTextPassword" value="Aaswq123" />
+    </Sohato>
+</packageSourceCredentials>
+</configuration>
