@@ -1,5 +1,10 @@
 # Enable TLS and grab a valid certificate for your domain
 
+INSTALLING CERT-MANAGER
+# https://cert-manager.io/docs/installation/
+kubectl apply -f https://github.com/cert-manager/cert-manager/releases/download/v1.13.0/cert-manager.yaml
+
+
 This demo will use the Nginx Ingress Controller, so be sure to have it installed before proceeding.
 
 Further this will only work for non-wildcard domains because we'll use the `HTTP Validation Challenge` and not the `DNS Validation` one.
