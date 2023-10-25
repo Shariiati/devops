@@ -1,0 +1,20 @@
+version: "3"
+services:
+  jfrog:
+    image: docker.bintray.io/jfrog/artifactory-jcr
+    restart: always
+    ports:
+      - 8081:8081
+      - 8082:8082
+    volumes:
+      - /sdb-lv/jfrog:/var/opt/jfrog/artifactory
+    environment:
+      -  EXTRA_JAVA_OPTIONS='-Xmx8g'
+  nexus:
+    image: docker.sohato.com/sonatype/nexus3
+    restart: always
+    ports:
+      - 8083:8081
+      - 8084:8082
+    volumes:
+      - /sdb-lv/nexus:/nexus-data
