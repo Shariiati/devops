@@ -1,0 +1,207 @@
+
+Confluence:
+dms.si24.ir:8443
+---
+Code Repository:
+cr.si24.ir
+---
+Package Repository:
+pr.si24.ir:8443
+----------
+Develop:
+IP: 192.168.100.54
+Port: 2302
+---
+Staging:
+IP: 192.168.100.187
+Port: 2302
+---
+User: orazizade (Koosha Orazizade)
+Pass: Abc@1234
+
+
+---------------------------------------------------------------
+
+Permanent Resolv.Conf
+=====================
+sudo apt install resolvconf -y
+sudo systemctl status resolvconf.service
+sudo systemctl enable resolvconf.service
+sudo vim /etc/resolvconf/resolv.conf.d/head
+sudo systemctl restart resolvconf.service
+sudo systemctl restart systemd-resolved.service
+sudo resolvconf --enable-updates
+sudo resolvconf -u 
+ 
+nameserver 178.22.122.100
+nameserver 185.51.200.2
+------------------------------------------------------------------
+
+Nexus_password
+
+sudo vim /etc/apt/auth.conf.d/pr.si24.ir.conf
+
+machine https://pr.si24.ir:8443/
+login deployer
+password D3@p1Io#0%oy!3R
+----------------------------------------------------------------
+daemon.json mirror repository
+ 
+{
+   "insecure-registries": [
+      "http://192.168.100.198:9000",
+      "http://192.168.100.198:9001",
+      "http://192.168.100.198:9002",
+      "http://192.168.100.198:9003"
+   ],
+
+	"registry-mirrors":
+	[
+	"https://docker.nowire.ir",
+	"https://docker.iranrepo.ir",
+	"https://docker.host:5000",
+	"https://registry.docker.ir",
+	"https://docker.iranserver.com"
+	]
+} 
+ 
+
+--------------------------------------------------------------
+netplan config:::
+
+network:
+  ethernets:
+    ens33:
+      dhcp4: false
+      addresses:
+        - 10.1.25.120/24
+      gateway4: 10.1.25.1
+      nameservers:
+        addresses:
+          - 192.168.100.6
+          - 192.168.100.7
+          - 8.8.8.8
+  version: 2
+-------------------------------------------------------------
+delete ns stuck in terminating:
+
+
+NS=`kubectl get ns |grep Terminating | awk 'NR==1 {print $1}'` && kubectl get namespace "$NS" -o json   | tr -d "\n" | sed "s/\"finalizers\": \[[^]]\+\]/\"finalizers\": []/"   | kubectl replace --raw /api/v1/namespaces/$NS/finalize -f -
+
+----------------------------------------------------------------
+create secret for nexus-image repository:
+
+kubectl create secret -n test-app docker-registry nexus-cred --docker-server=192.168.100.198:9003 --docker-username=deployer --docker-password='D3@p1Io#0%oy!3R'
+
+----------------------------------------------------------------
+
+sudo gitlab-runner register \
+  --non-interactive \
+  --url "https://cr.si24.ir/" \
+  --tls-ca-file /etc/gitlab-runner/ssl/cr.si24.ir.crt \
+  --registration-token "GR1348941NzM8z3j-spTUV5FJP6YZ" \
+  --description "Developing Life PolicyData " \
+  --maintenance-note "Life_PolicyData Maintenance Mode. Please wait..." \
+  --executor ssh \
+  --ssh-host 127.0.0.1 \
+  --ssh-port 2302 \
+  --ssh-user deployer \
+  --ssh-password D3@p1Io#0%oy$3R \
+  --ssh-identity-file "/home/deployer/.ssh/id_rsa" \
+  --shell bash \
+  --run-untagged="false" \
+  --tag-list "develop, dev-life-pdata" \
+  --locked="true" \
+  --ssh-disable-strict-host-key-checking="true" \
+  --config /etc/gitlab-runner/config.toml
+
+----------------------------------------------------------------
+removing docker containers and remove them
+docker stop $(docker ps -aq) && docker rm $(docker ps -aq)  "&& docker rmi $(docker images -q)"
+-----------------------------------------------------------------
+enable argocd exec shell
+
+1- edit configmap argocd-cm to and enable exec:
+apiVersion: v1
+data:
+  accounts.test: apiKey,login
+  admin.enabled: "true"
+  application.instanceLabelKey: argocd.argoproj.io/instance
+  exec.enabled: "true"  **
+  server.insecure: "true"
+  server.rbac.log.enforce.enable: "false"
+  timeout.hard.reconciliation: 0s
+  timeout.reconciliation: 180s
+kind: ConfigMap
+
+2- edit clusterrole and role argocd-server and enable the exec:
+
+- apiGroups:
+  - ""
+  resources:
+  - pods
+  - pods/log
+  - pods/exec  **
+  verbs:
+  - get
+  - create  **
+
+3- edit the rbac cm argocd-rbac-cm add the line:
+apiVersion: v1
+data:
+  policy.csv: |
+**  p, role:testgrp, exec, create, */*, allow
+    p, role:testgrp, applications, get, *, allow
+**  p, role:admin, exec, create, */*, allow
+    g, admin, role:admin
+    g, test, role:testgrp
+  scopes: '[groups]'
+kind: ConfigMap
+
+[‎11/‎20/‎2023 1:51 PM]  
+https://www.youtube.com/watch?v=VJUWqegYXVE 
+ 
+------------------------------------------------------------
+
+adding new disk to ubuntu for mounting to a directory
+
+for host in /sys/class/scsi_host/*; do echo "- - -" | sudo tee $host/scan; ls /dev/sd* ; done
+
+1-       parted /dev/sdb
+(parted) mklabel gpt                     # create a GPT partition table
+(parted) mkpart primary ext4 0% 100%     # create a primary partition using all available space
+(parted) quit
+
+2-  pvcreate /dev/sdb1
+    vgcreate ubuntu-vg2 /dev/sdb1
+
+3-  lvcreate -n ubuntu-lv2 -L 95G(-l +100%FREE ) ubuntu-vg2 
+
+4-  mkfs.ext4 /dev/ubuntu-vg2/ubuntu-lv2
+
+5-  mkdir /mnt/hdd
+    mount /dev/ubuntu-vg2/ubuntu-lv2 /mnt/hdd
+
+6-  vi /etc/fstab
+   /dev/ubuntu-vg2/ubuntu-lv2 /mnt/hdd ext4 defaults 0 0
+7- resize2fs /dev/ubuntu-vg2/ubuntu-lv2
+--------------------------------------------------------
+extend disk :
+
+1-echo 1 > /sys/class/block/sda/device/rescan
+2- cfdisk add to partition
+3-pvresize /dev/sda3
+4-lvextend -l +100%FREE /dev/ubuntu-vg/ubuntu-lv
+5-resize2fs /dev/ubuntu-vg/ubuntu-lv
+---------------------------------------------------------
+taint and tolerations for node_exporter daemonset:
+## add these to daemonset that you want to schedule on masternodes also
+    tolerations:
+    - key: "node-role.kubernetes.io/etcd"
+      operator: "Exists"
+      effect: "NoExecute"
+    - key: "node-role.kubernetes.io/controlplane"
+      operator: "Exists"
+      effect: "NoSchedule"
+---------------------------------------------------------
+
